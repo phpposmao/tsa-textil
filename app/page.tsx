@@ -48,6 +48,12 @@ export default function WebinarLandingPage() {
 
           <div className="relative aspect-video max-w-3xl mx-auto mb-8 bg-gray-900 rounded-xl overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center">
+              <iframe
+                className="absolute inset-0 w-full h-full object-cover"
+                src="https://www.youtube.com/embed/CXS-6rzAqNA"
+                title="Product Overview Video"
+                aria-hidden="true"
+              />
             </div>
           </div>
 
