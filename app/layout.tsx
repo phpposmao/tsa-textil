@@ -33,7 +33,7 @@ const glancyr = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "TSA | TExtil",
+  title: "TSA | Textil",
   description: "",
   icons: {
     icon: {
