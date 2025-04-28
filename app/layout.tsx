@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
-import localFont from "next/font/local"
-import FacebookPixel from '@/components/facebook-pixel'
+import type { Metadata } from 'next';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import localFont from "next/font/local";
+import dynamic from "next/dynamic";
+import React from 'react'
 
 const glancyr = localFont({
   src: [
@@ -44,6 +45,8 @@ export const metadata: Metadata = {
   }
 }
 
+const PixelTracker = React.lazy(() => import('../components/PixelTracker'));
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,10 +55,38 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={glancyr.className}>
+      <head>
+        {/* Meta Pixel Code */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?                         
+              n.callMethod.apply(n,arguments):n.queue.push   
+              (arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!
+              0;n.version='2.0';n.queue=[];t=b.createElement(e);
+              t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,
+              'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '2502040153502437');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=2502040153502437&ev=
+            PageView&noscript=1"/>
+        </noscript>
+        {/* End Meta Pixel Code */}
+      </head>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
         </ThemeProvider>
-        <FacebookPixel />
       </body>
     </html>
   )
