@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import localFont from "next/font/local"
+import FacebookPixel from '@/components/facebook-pixel'
 
 const glancyr = localFont({
   src: [
@@ -54,6 +55,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
         </ThemeProvider>
+        <FacebookPixel />
       </body>
     </html>
   )
